@@ -2,7 +2,7 @@ model Message {
     id           String    @id @default(cuid())
     roomId       Int
     content      String
-    mentions     User[]    @relation("mentionedUser")
+    mentions     String[]
     replyingToId String?
     edited       Boolean   @default(false)
     deleted      Boolean   @default(false)
