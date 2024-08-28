@@ -53,8 +53,7 @@ model User {
     createdAt               DateTime            @default(now())
     updatedAt               DateTime            @updatedAt
     permissions             PermissionType[]    @default([])
-    auction                 Auction[]
-    auctionBid              AuctionBid[]
+    bids                    AuctionBid[]
     form                    Form[]
     message                 Message[]
     rooms                   RoomUser[]
@@ -82,6 +81,8 @@ model User {
     settings                UserSetting?
     statistics              UserStatistic?
     titles                  UserTitle[]
+    auctions                Auction[]           @relation("auctions")
+    wonAuctions             Auction[]           @relation("wonAuctions")
 }
 
 model UserBanner {

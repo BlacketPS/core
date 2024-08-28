@@ -12,12 +12,14 @@ model Auction {
     createdAt DateTime     @default(now())
     updatedAt DateTime     @updatedAt
     blookId   Int?
-    blook     UserBlook?       @relation(fields: [blookId], references: [id])
+    blook     UserBlook?   @relation(fields: [blookId], references: [id])
     itemId    Int?
-    item      UserItem?        @relation(fields: [itemId], references: [id])
-    sellerId  String       @db.VarChar(255)
-    seller    User         @relation(fields: [sellerId], references: [id], onDelete: NoAction)
+    item      UserItem?    @relation(fields: [itemId], references: [id])
     bids      AuctionBid[]
+    sellerId  String
+    seller    User         @relation("auctions", fields: [sellerId], references: [id])
+    buyerId   String?
+    buyer     User?        @relation("wonAuctions", fields: [buyerId], references: [id])
 }
 
 model AuctionBid {
