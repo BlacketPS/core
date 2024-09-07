@@ -7,4 +7,5 @@ model Banner {
     updatedAt  DateTime     @updatedAt
     resource   Resource     @relation(fields: [imageId], references: [id], onDelete: NoAction)
     userBanner UserBanner[]
+    itemShop   ItemShop[]
 }

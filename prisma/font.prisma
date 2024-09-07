@@ -7,4 +7,5 @@ model Font {
     user       User[]
     resourceId Int
     resource   Resource  @relation(fields: [resourceId], references: [id], onDelete: NoAction)
+    itemShop   ItemShop[]
 }
