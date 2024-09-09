@@ -81,6 +81,7 @@ model User {
     settings                UserSetting?
     statistics              UserStatistic?
     titles                  UserTitle[]
+    fonts                   UserFont[]
     auctions                Auction[]           @relation("auctions")
     wonAuctions             Auction[]           @relation("wonAuctions")
 }
@@ -245,6 +246,16 @@ model UserStatistic {
     packsOpened  Int    @default(0)
     messagesSent Int    @default(0)
     user         User   @relation(fields: [id], references: [id], onDelete: Cascade)
+}
+
+model UserFont {
+    id        Int      @id @default(autoincrement())
+    userId    String
+    fontId    Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    font      Font     @relation(fields: [fontId], references: [id], onDelete: NoAction)
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UserTitle {
