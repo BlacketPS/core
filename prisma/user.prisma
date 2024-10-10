@@ -55,8 +55,8 @@ model User {
     lastSeen                DateTime?           @default(dbgenerated("timestamp '1970-01-01 00:00:00'")) // epoch 0
     permissions             PermissionType[]    @default([])
     bids                    AuctionBid[]
-    form                    Form[]
-    message                 Message[]
+    forms                   Form[]
+    messages                Message[]
     rooms                   RoomUser[]
     sessions                Session[]
     avatar                  Resource            @relation("avatar", fields: [avatarId], references: [id], onDelete: Cascade)
@@ -75,7 +75,7 @@ model User {
     ipAddresses             UserIpAddress[]
     initiallyObtainedItems  UserItem[]          @relation("initiallyObtainedItems")
     items                   UserItem[]          @relation("items")
-    userOauth               UserOAuth[]
+    userOAuth               UserOAuth[]
     paymentMethods          UserPaymentMethod[]
     givenPunishments        UserPunishment[]    @relation("givenPunishments")
     punishments             UserPunishment[]    @relation("punishments")
@@ -238,6 +238,7 @@ model UserSetting {
     openPacksInstantly Boolean              @default(false)
     friendRequests     SettingFriendRequest @default(ON)
     categoriesClosed   String[]             @default([])
+    tutorialsCompleted String[]             @default([])
     otpSecret          String?
     user               User                 @relation(fields: [id], references: [id], onDelete: Cascade)
 }

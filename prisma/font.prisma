@@ -9,6 +9,6 @@ model Font {
     resource   Resource   @relation(fields: [resourceId], references: [id], onDelete: NoAction)
     itemShop   ItemShop[]
     products   Product[]
-    users      User[]
-    userFont   UserFont[]
+    users      UserFont[]
+    usersUsing User[]
 }
