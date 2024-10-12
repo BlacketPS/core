@@ -1,20 +1,21 @@
 model Resource {
     id               Int       @id @default(autoincrement())
     path             String
+    reference        String?   @unique
     createdAt        DateTime  @default(now())
     updatedAt        DateTime  @updatedAt
-    banner           Banner[]
+    banners          Banner[]
     blookBackgrounds Blook[]   @relation("blookBackground")
     blooks           Blook[]   @relation("blook")
-    emoji            Emoji[]
-    font             Font[]
-    group            Group[]
-    guild            Guild[]
-    item             Item[]
-    pack             Pack[]
-    product          Product[]
-    avatars          User[]    @relation("avatar")
-    banners          User[]    @relation("banner")
+    emojis           Emoji[]
+    fonts            Font[]
+    groups           Group[]
+    guilds           Guild[]
+    items            Item[]
+    packs            Pack[]
+    products         Product[]
+    userAvatars      User[]    @relation("avatar")
+    userBanners      User[]    @relation("banner")
     customAvatars    User[]    @relation("customAvatar")
     customBanners    User[]    @relation("customBanner")
 }
