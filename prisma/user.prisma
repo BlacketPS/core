@@ -196,16 +196,15 @@ model UserOAuth {
 }
 
 model UserPaymentMethod {
-    id                    Int      @id @default(autoincrement())
-    userId                String
-    squareCustomerId      String
-    squarePaymentMethodId String
-    lastFour              String
-    createdAt             DateTime @default(now())
-    updatedAt             DateTime @updatedAt
-    cardBrand             String
-    primary               Boolean  @default(false)
-    user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id              Int      @id @default(autoincrement())
+    userId          String
+    paymentMethodId String
+    lastFour        String
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+    cardBrand       String
+    primary         Boolean  @default(false)
+    user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UserPunishment {
