@@ -8,4 +8,5 @@ model Banner {
     resource   Resource     @relation(fields: [imageId], references: [id], onDelete: NoAction)
     userBanner UserBanner[]
     itemShop   ItemShop[]
+    products   Product[]
 }

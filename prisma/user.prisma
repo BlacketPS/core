@@ -53,6 +53,7 @@ model User {
     createdAt               DateTime            @default(now())
     updatedAt               DateTime            @updatedAt
     lastSeen                DateTime?           @default(dbgenerated("timestamp '1970-01-01 00:00:00'")) // epoch 0
+    stripeCustomerId        String?
     permissions             PermissionType[]    @default([])
     bids                    AuctionBid[]
     forms                   Form[]
