@@ -12,7 +12,8 @@ model Resource {
     groups           Group[]
     guilds           Guild[]
     items            Item[]
-    packs            Pack[]
+    packIcons        Pack[]    @relation("icon")
+    packImages       Pack[]    @relation("image")
     products         Product[]
     userAvatars      User[]    @relation("avatar")
     userBanners      User[]    @relation("banner")

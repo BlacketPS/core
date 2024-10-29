@@ -8,26 +8,31 @@ enum ProductType {
 }
 
 model Product {
-    id          Int         @id @default(autoincrement())
-    name        String      @unique
-    description String?
-    price       Float       @default(0)
-    imageId     Int
-    type        ProductType
-    itemId      Int?
-    blookId     Int?
-    titleId     Int?
-    fontId      Int?
-    bannerId    Int?
-    groupId     Int?
-    priority    Int         @default(0)
-    createdAt   DateTime    @default(now())
-    updatedAt   DateTime    @updatedAt
-    image       Resource    @relation(fields: [imageId], references: [id], onDelete: NoAction)
-    blook       Blook?      @relation(fields: [blookId], references: [id])
-    item        Item?       @relation(fields: [itemId], references: [id])
-    title       Title?      @relation(fields: [titleId], references: [id])
-    font        Font?       @relation(fields: [fontId], references: [id])
-    banner      Banner?     @relation(fields: [bannerId], references: [id])
-    group       Group?      @relation(fields: [groupId], references: [id])
+    id             Int                @id @default(autoincrement())
+    name           String             @unique
+    description    String?
+    price          Float              @default(0)
+    imageId        Int
+    type           ProductType
+    itemId         Int?
+    blookId        Int?
+    titleId        Int?
+    fontId         Int?
+    bannerId       Int?
+    groupId        Int?
+    isSubscription Boolean?           @default(false)
+    monthlyPrice   Float?             @default(0)
+    yearlyPrice    Float?             @default(0)
+    lifetimePrice  Float?             @default(0)
+    priority       Int                @default(0)
+    createdAt      DateTime           @default(now())
+    updatedAt      DateTime           @updatedAt
+    image          Resource           @relation(fields: [imageId], references: [id], onDelete: NoAction)
+    blook          Blook?             @relation(fields: [blookId], references: [id])
+    item           Item?              @relation(fields: [itemId], references: [id])
+    title          Title?             @relation(fields: [titleId], references: [id])
+    font           Font?              @relation(fields: [fontId], references: [id])
+    banner         Banner?            @relation(fields: [bannerId], references: [id])
+    group          Group?             @relation(fields: [groupId], references: [id])
+    subscribers    UserSubscription[]
 }
