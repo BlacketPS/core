@@ -8,13 +8,14 @@ enum RarityAnimationType {
 }
 
 model Rarity {
-    id            Int                 @id @default(autoincrement())
-    name          String              @unique
-    color         String
-    animationType RarityAnimationType
-    experience    Int
-    createdAt     DateTime            @default(now())
-    updatedAt     DateTime            @updatedAt
-    blook         Blook[]
-    item          Item[]
+    id                Int                 @id @default(autoincrement())
+    name              String              @unique
+    color             String
+    animationType     RarityAnimationType
+    experience        Int
+    affectedByBooster Boolean             @default(false)
+    createdAt         DateTime            @default(now())
+    updatedAt         DateTime            @updatedAt
+    blook             Blook[]
+    item              Item[]
 }

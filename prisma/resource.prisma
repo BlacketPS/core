@@ -17,6 +17,4 @@ model Resource {
     products         Product[]
     userAvatars      User[]    @relation("avatar")
     userBanners      User[]    @relation("banner")
-    customAvatars    User[]    @relation("customAvatar")
-    customBanners    User[]    @relation("customBanner")
 }

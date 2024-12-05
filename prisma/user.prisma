@@ -47,12 +47,14 @@ model User {
     fontId                  Int
     color                   String              @default("#ffffff")
     tokens                  Int                 @default(0)
+    crystals                Int                 @default(0)
     experience              Int                 @default(0)
-    lastClaimed             DateTime?           @default(dbgenerated("timestamp '1970-01-01 00:00:00'")) // epoch 0
+    lastClaimed             DateTime            @default(dbgenerated("timestamp '1970-01-01 00:00:00'")) // epoch 0
+    lastRead                DateTime            @default(dbgenerated("timestamp '1970-01-01 00:00:00'")) // epoch 0
     ipAddress               String?
     createdAt               DateTime            @default(now())
     updatedAt               DateTime            @updatedAt
-    lastSeen                DateTime?           @default(dbgenerated("timestamp '1970-01-01 00:00:00'")) // epoch 0
+    lastSeen                DateTime            @default(dbgenerated("timestamp '1970-01-01 00:00:00'")) // epoch 0
     stripeCustomerId        String?
     subscriptionId          Int?
     subscription            UserSubscription?
@@ -64,8 +66,8 @@ model User {
     sessions                Session[]
     avatar                  Resource            @relation("avatar", fields: [avatarId], references: [id], onDelete: Cascade)
     banner                  Resource            @relation("banner", fields: [bannerId], references: [id], onDelete: Cascade)
-    customAvatar            Resource?           @relation("customAvatar", fields: [customAvatarId], references: [id])
-    customBanner            Resource?           @relation("customBanner", fields: [customBannerId], references: [id])
+    customAvatar            Upload?             @relation("customAvatar", fields: [customAvatarId], references: [id])
+    customBanner            Upload?             @relation("customBanner", fields: [customBannerId], references: [id])
     font                    Font                @relation(fields: [fontId], references: [id], onDelete: NoAction)
     title                   Title               @relation(fields: [titleId], references: [id], onDelete: NoAction)
     banners                 UserBanner[]
@@ -88,6 +90,8 @@ model User {
     fonts                   UserFont[]
     auctions                Auction[]           @relation("auctions")
     wonAuctions             Auction[]           @relation("wonAuctions")
+    boosts                  Boost[]
+    uploads                 Upload[]
 }
 
 model UserBanner {
@@ -98,21 +102,24 @@ model UserBanner {
     updatedAt DateTime @updatedAt
     banner    Banner   @relation(fields: [bannerId], references: [id], onDelete: NoAction)
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, bannerId])
 }
 
 model UserBlook {
-    id               Int               @id @default(autoincrement())
-    userId           String
-    blookId          Int
-    sold             Boolean           @default(false)
-    initalObtainerId String
-    obtainedBy       BlookObtainMethod @default(PACK_OPEN)
-    createdAt        DateTime          @default(now())
-    updatedAt        DateTime          @updatedAt
-    blook            Blook             @relation(fields: [blookId], references: [id], onDelete: Cascade)
-    initialObtainer  User              @relation("initialObtainer", fields: [initalObtainerId], references: [id], onDelete: Cascade)
-    user             User              @relation("blooks", fields: [userId], references: [id], onDelete: Cascade)
-    auctions         Auction[]
+    id                Int               @id @default(autoincrement())
+    userId            String
+    blookId           Int
+    sold              Boolean           @default(false)
+    shiny             Boolean           @default(false)
+    initialObtainerId String
+    obtainedBy        BlookObtainMethod @default(PACK_OPEN)
+    createdAt         DateTime          @default(now())
+    updatedAt         DateTime          @updatedAt
+    blook             Blook             @relation(fields: [blookId], references: [id], onDelete: Cascade)
+    initialObtainer   User              @relation("initialObtainer", fields: [initialObtainerId], references: [id], onDelete: Cascade)
+    user              User              @relation("blooks", fields: [userId], references: [id], onDelete: Cascade)
+    auctions          Auction[]
 
     @@index([userId, blookId])
 }
@@ -135,6 +142,8 @@ model UserGroup {
     updatedAt DateTime @updatedAt
     group     Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([groupId, userId])
 }
 
 model UserGuild {
@@ -146,6 +155,8 @@ model UserGuild {
     updatedAt DateTime  @updatedAt
     guild     Guild     @relation(fields: [guildId], references: [id], onDelete: Cascade)
     user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([guildId, userId])
 }
 
 model UserGuildRequest {
@@ -156,6 +167,8 @@ model UserGuildRequest {
     updatedAt DateTime @updatedAt
     guild     Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([guildId, userId])
 }
 
 model UserIpAddress {
@@ -264,6 +277,8 @@ model UserFont {
     updatedAt DateTime @updatedAt
     font      Font     @relation(fields: [fontId], references: [id], onDelete: NoAction)
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, fontId])
 }
 
 model UserTitle {
@@ -274,6 +289,8 @@ model UserTitle {
     updatedAt DateTime @updatedAt
     title     Title    @relation(fields: [titleId], references: [id], onDelete: NoAction)
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, titleId])
 }
 
 model UserSubscription {
