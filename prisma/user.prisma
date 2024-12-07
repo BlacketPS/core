@@ -82,8 +82,8 @@ model User {
     items                   UserItem[]          @relation("items")
     userOAuth               UserOAuth[]
     paymentMethods          UserPaymentMethod[]
-    givenPunishments        UserPunishment[]    @relation("givenPunishments")
-    punishments             UserPunishment[]    @relation("punishments")
+    givenPunishments        Punishment[]        @relation("givenPunishments")
+    punishments             Punishment[]        @relation("punishments")
     settings                UserSetting?
     statistics              UserStatistic?
     titles                  UserTitle[]
@@ -225,19 +225,6 @@ model UserPaymentMethod {
     cardBrand       String
     primary         Boolean  @default(false)
     user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model UserPunishment {
-    id        Int            @id @default(autoincrement())
-    userId    String
-    type      PunishmentType
-    reason    String
-    expiresAt DateTime
-    staffId   String
-    createdAt DateTime       @default(now())
-    updatedAt DateTime       @updatedAt
-    staff     User           @relation("givenPunishments", fields: [staffId], references: [id], onDelete: Cascade)
-    user      User           @relation("punishments", fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // model UserRelationship {
