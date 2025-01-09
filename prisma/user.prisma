@@ -1,6 +1,7 @@
 enum BlookObtainMethod {
     UNKNOWN
     PACK_OPEN
+    PURCHASE
     STAFF
 }
 

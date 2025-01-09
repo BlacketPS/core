@@ -13,6 +13,8 @@ model Product {
     description    String?
     price          Float              @default(0)
     imageId        Int
+    color1         String             @default("#1f1f1f")
+    color2         String             @default("#0f0f0f")
     type           ProductType
     itemId         Int?
     blookId        Int?
@@ -35,4 +37,5 @@ model Product {
     banner         Banner?            @relation(fields: [bannerId], references: [id])
     group          Group?             @relation(fields: [groupId], references: [id])
     subscribers    UserSubscription[]
+    stores         Store[]
 }
