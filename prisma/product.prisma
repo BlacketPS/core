@@ -23,9 +23,9 @@ model Product {
     bannerId       Int?
     groupId        Int?
     isSubscription Boolean?           @default(false)
-    monthlyPrice   Float?             @default(0)
-    yearlyPrice    Float?             @default(0)
-    lifetimePrice  Float?             @default(0)
+    monthlyPrice   Float?
+    yearlyPrice    Float?
+    lifetimePrice  Float?
     priority       Int                @default(0)
     createdAt      DateTime           @default(now())
     updatedAt      DateTime           @updatedAt

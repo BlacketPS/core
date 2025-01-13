@@ -62,7 +62,7 @@ model User {
     bids                    AuctionBid[]
     forms                   Form[]
     messages                Message[]
-    rooms                   RoomUser[]
+    rooms                   Room[]
     sessions                Session[]
     avatar                  Resource            @relation("avatar", fields: [avatarId], references: [id], onDelete: Cascade)
     banner                  Resource            @relation("banner", fields: [bannerId], references: [id], onDelete: Cascade)
