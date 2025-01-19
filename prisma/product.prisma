@@ -38,4 +38,5 @@ model Product {
     group          Group?             @relation(fields: [groupId], references: [id])
     subscribers    UserSubscription[]
     stores         Store[]
+    transactions   Transaction[]
 }

@@ -95,6 +95,7 @@ model User {
     uploads                 Upload[]
     newsPosts               NewsPost[]
     votedNewsPosts          UserNewsPostVote[]
+    transactions            Transaction[]
 }
 
 model UserBanner {
@@ -220,15 +221,16 @@ model UserOAuth {
 }
 
 model UserPaymentMethod {
-    id              Int      @id @default(autoincrement())
+    id              Int           @id @default(autoincrement())
     userId          String
     paymentMethodId String
     lastFour        String
-    createdAt       DateTime @default(now())
-    updatedAt       DateTime @updatedAt
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
     cardBrand       String
-    primary         Boolean  @default(false)
-    user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    primary         Boolean       @default(false)
+    user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+    transactions    Transaction[]
 }
 
 model UserSetting {
