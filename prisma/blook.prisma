@@ -18,6 +18,7 @@ model Blook {
     backgroundId Int
     packId       Int?
     onlyOnDay    DayType?
+    shinyHue     Int?
     priority     Int         @default(0)
     createdAt    DateTime    @default(now())
     updatedAt    DateTime    @updatedAt

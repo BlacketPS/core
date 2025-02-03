@@ -17,6 +17,7 @@
     "scripts": {
         "prisma:push": "dotenv -e ../.env -- npx prisma db push --schema prisma",
         "prisma:studio": "dotenv -e ../.env -- npx prisma studio --schema prisma",
+		"prisma:format": "dotenv -e ../.env -- npx prisma format --schema prisma",
         "generate": "dotenv -e ../.env -- npx prisma generate --schema prisma",
         "postinstall": "npm run generate"
     }

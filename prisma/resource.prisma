@@ -15,7 +15,6 @@ model Resource {
     packIcons        Pack[]     @relation("icon")
     packImages       Pack[]     @relation("image")
     products         Product[]
-    userAvatars      User[]     @relation("avatar")
     userBanners      User[]     @relation("banner")
     newsPosts        NewsPost[]
 }

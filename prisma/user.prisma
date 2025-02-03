@@ -40,9 +40,9 @@ model User {
     id                      String              @id
     username                String              @unique
     password                String
-    avatarId                Int
+    avatarId                Int?
     customAvatarId          Int?
-    bannerId                Int
+    bannerId                Int?
     customBannerId          Int?
     titleId                 Int
     fontId                  Int
@@ -64,8 +64,10 @@ model User {
     messages                Message[]
     rooms                   Room[]
     sessions                Session[]
-    avatar                  Resource            @relation("avatar", fields: [avatarId], references: [id], onDelete: Cascade)
-    banner                  Resource            @relation("banner", fields: [bannerId], references: [id], onDelete: Cascade)
+    friendedBy              User[]              @relation("friendship")
+    friends                 User[]              @relation("friendship")
+    avatar                  UserBlook?          @relation(fields: [avatarId], references: [id], onDelete: NoAction)
+    banner                  Resource?           @relation("banner", fields: [bannerId], references: [id], onDelete: Cascade)
     customAvatar            Upload?             @relation("customAvatar", fields: [customAvatarId], references: [id])
     customBanner            Upload?             @relation("customBanner", fields: [customBannerId], references: [id])
     font                    Font                @relation(fields: [fontId], references: [id], onDelete: NoAction)
@@ -96,6 +98,8 @@ model User {
     newsPosts               NewsPost[]
     votedNewsPosts          UserNewsPostVote[]
     transactions            Transaction[]
+    auditLogs               AuditLog[]          @relation("auditLogActor")
+    undoneLogs              AuditLog[]          @relation("auditLogUndoneBy")
 }
 
 model UserBanner {
@@ -124,6 +128,7 @@ model UserBlook {
     initialObtainer   User              @relation("initialObtainer", fields: [initialObtainerId], references: [id], onDelete: Cascade)
     user              User              @relation("blooks", fields: [userId], references: [id], onDelete: Cascade)
     auctions          Auction[]
+    avatars           User[]
 
     @@index([userId, blookId])
 }
