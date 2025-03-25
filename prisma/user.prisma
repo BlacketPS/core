@@ -60,7 +60,6 @@ model User {
     subscription            UserSubscription?
     permissions             PermissionType[]    @default([])
     bids                    AuctionBid[]
-    forms                   Form[]
     messages                Message[]
     rooms                   Room[]
     sessions                Session[]
