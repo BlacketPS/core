@@ -40,6 +40,8 @@ model User {
     id                      String              @id
     username                String              @unique
     password                String
+    email                   String?             @unique
+    emailVerified           Boolean             @default(false)
     avatarId                Int?
     customAvatarId          Int?
     bannerId                Int?
