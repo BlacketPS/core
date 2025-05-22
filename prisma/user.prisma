@@ -291,8 +291,9 @@ model UserSubscription {
     productId            Int
     createdAt            DateTime @default(now())
     updatedAt            DateTime @updatedAt
+    expiresAt            DateTime
     user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    subscription         Product  @relation(fields: [productId], references: [id], onDelete: NoAction)
+    product              Product  @relation(fields: [productId], references: [id], onDelete: NoAction)
 }
 
 model UserNewsPostVote {
