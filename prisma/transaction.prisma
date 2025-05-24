@@ -1,3 +1,11 @@
+enum TransactionStatus {
+    PENDING
+    COMPLETED
+    FAILED
+    REFUNDED
+    DISPUTED
+}
+
 model Transaction {
     id              Int               @id @default(autoincrement())
     userId          String
@@ -5,6 +13,7 @@ model Transaction {
     productId       Int
     paymentMethodId Int
     stripePaymentId String
+    status          TransactionStatus @default(PENDING)
     createdAt       DateTime          @default(now())
     user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
     product         Product           @relation(fields: [productId], references: [id], onDelete: Cascade)
