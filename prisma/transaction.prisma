@@ -9,7 +9,7 @@ enum TransactionStatus {
 model Transaction {
     id              Int               @id @default(autoincrement())
     userId          String
-    price           Float
+    amount          Float
     productId       Int
     paymentMethodId Int
     stripePaymentId String

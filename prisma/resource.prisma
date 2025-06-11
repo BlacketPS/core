@@ -17,4 +17,5 @@ model Resource {
     packBackgrounds  Pack[]    @relation("background")
     products         Product[]
     userBanners      User[]    @relation("banner")
+    rarities         Rarity[]
 }
