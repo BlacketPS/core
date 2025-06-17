@@ -6,16 +6,24 @@ enum TransactionStatus {
     DISPUTED
 }
 
+enum CurrencyType {
+    USD
+    GEM
+}
+
 model Transaction {
-    id              Int               @id @default(autoincrement())
+    id              String            @id @default(uuid())
     userId          String
     amount          Float
+    quantity        Int
+    currency        CurrencyType      @default(USD)
     productId       Int
     paymentMethodId Int
-    stripePaymentId String
+    ipAddressId     Int
     status          TransactionStatus @default(PENDING)
     createdAt       DateTime          @default(now())
     user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
     product         Product           @relation(fields: [productId], references: [id], onDelete: Cascade)
     paymentMethod   UserPaymentMethod @relation(fields: [paymentMethodId], references: [id], onDelete: Cascade)
+    ipAddress       IpAddress         @relation(fields: [ipAddressId], references: [id], onDelete: Cascade)
 }

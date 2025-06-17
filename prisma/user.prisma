@@ -36,6 +36,12 @@ enum SettingFriendRequest {
     MUTUAL
 }
 
+enum UserSubscriptionStatus {
+    ACTIVE
+    INACTIVE
+    CANCELED
+}
+
 model User {
     id                      String              @id
     username                String              @unique
@@ -58,8 +64,7 @@ model User {
     updatedAt               DateTime            @updatedAt
     lastSeen                DateTime            @default(dbgenerated("timestamp '1970-01-01 00:00:00'")) // epoch 0
     stripeCustomerId        String?
-    subscriptionId          Int?
-    subscription            UserSubscription?
+    subscriptions           UserSubscription[]
     permissions             PermissionType[]    @default([])
     bids                    AuctionBid[]
     messages                Message[]
@@ -285,15 +290,18 @@ model UserTitle {
 }
 
 model UserSubscription {
-    id                   Int      @id @default(autoincrement())
-    userId               String   @unique
-    stripeSubscriptionId String
+    id                   Int                    @id @default(autoincrement())
+    userId               String
+    stripeSubscriptionId String                 @unique
     productId            Int
-    createdAt            DateTime @default(now())
-    updatedAt            DateTime @updatedAt
-    expiresAt            DateTime
-    user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    product              Product  @relation(fields: [productId], references: [id], onDelete: NoAction)
+    status               UserSubscriptionStatus @default(ACTIVE)
+    createdAt            DateTime               @default(now())
+    updatedAt            DateTime               @updatedAt
+    expiresAt            DateTime?
+    user                 User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    product              Product                @relation(fields: [productId], references: [id], onDelete: NoAction)
+
+    @@unique([userId, stripeSubscriptionId])
 }
 
 model UserNewsPostVote {

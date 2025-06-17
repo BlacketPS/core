@@ -6,4 +6,5 @@ model IpAddress {
     users           User[]
     userIpAddresses UserIpAddress[]
     blacklists      Blacklist[]
+    transactions    Transaction[]
 }
