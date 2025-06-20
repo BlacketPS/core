@@ -17,6 +17,7 @@ model Transaction {
     amount          Float
     quantity        Int
     currency        CurrencyType      @default(USD)
+    stripePaymentId String?           @unique
     productId       Int
     paymentMethodId Int
     ipAddressId     Int

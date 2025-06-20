@@ -63,6 +63,7 @@ model User {
     createdAt               DateTime            @default(now())
     updatedAt               DateTime            @updatedAt
     lastSeen                DateTime            @default(dbgenerated("timestamp '1970-01-01 00:00:00'")) // epoch 0
+    readRulesAt             DateTime?
     stripeCustomerId        String?
     subscriptions           UserSubscription[]
     permissions             PermissionType[]    @default([])
@@ -238,10 +239,11 @@ model UserPaymentMethod {
     userId          String
     paymentMethodId String
     lastFour        String
-    createdAt       DateTime      @default(now())
-    updatedAt       DateTime      @updatedAt
     cardBrand       String
     primary         Boolean       @default(false)
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+    deletedAt       DateTime?
     user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
     transactions    Transaction[]
 }
@@ -295,11 +297,13 @@ model UserSubscription {
     stripeSubscriptionId String                 @unique
     productId            Int
     status               UserSubscriptionStatus @default(ACTIVE)
+    ipAddressId          Int
     createdAt            DateTime               @default(now())
     updatedAt            DateTime               @updatedAt
     expiresAt            DateTime?
     user                 User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
     product              Product                @relation(fields: [productId], references: [id], onDelete: NoAction)
+    ipAddress            IpAddress              @relation(fields: [ipAddressId], references: [id], onDelete: Cascade)
 
     @@unique([userId, stripeSubscriptionId])
 }
