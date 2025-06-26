@@ -73,6 +73,8 @@ model User {
     sessions                Session[]
     friendedBy              User[]              @relation("friendship")
     friends                 User[]              @relation("friendship")
+    blockedBy               User[]              @relation("blockedUsers")
+    blocked                 User[]              @relation("blockedUsers")
     avatar                  UserBlook?          @relation(fields: [avatarId], references: [id], onDelete: NoAction)
     banner                  Resource?           @relation("banner", fields: [bannerId], references: [id], onDelete: Cascade)
     customAvatar            Upload?             @relation("customAvatar", fields: [customAvatarId], references: [id])
