@@ -9,4 +9,5 @@ model Banner {
     userBanner UserBanner[]
     itemShop   ItemShop[]
     products   Product[]
+    spinnyWheelRewards SpinnyWheelReward[]
 }

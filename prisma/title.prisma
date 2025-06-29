@@ -8,4 +8,5 @@ model Title {
     products   Product[]
     users      UserTitle[]
     usersUsing User[]
+    spinnyWheelRewards SpinnyWheelReward[]
 }

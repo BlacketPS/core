@@ -11,4 +11,5 @@ model Font {
     products   Product[]
     users      UserFont[]
     usersUsing User[]
+    spinnyWheelRewards SpinnyWheelReward[]
 }
