@@ -3,15 +3,15 @@ model Message {
     roomId           Int
     content          String
     mentions         String[]
+    authorId         String    @db.VarChar(255)
     replyingToId     String?
-    edited           Boolean   @default(false)
-    deleted          Boolean   @default(false)
+    discordMessageId String?
+    editedAt         DateTime?
     createdAt        DateTime  @default(now())
     updatedAt        DateTime  @updatedAt
-    authorId         String    @db.VarChar(255)
+    deletedAt        DateTime?
     author           User      @relation(fields: [authorId], references: [id], onDelete: NoAction)
     replyingTo       Message?  @relation("reply", fields: [replyingToId], references: [id])
     replies          Message[] @relation("reply")
     room             Room      @relation(fields: [roomId], references: [id], onDelete: NoAction)
-    discordMessageId String?
 }

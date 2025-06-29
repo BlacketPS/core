@@ -133,6 +133,9 @@ model UserBlook {
     initialObtainerId String
     obtainedBy        BlookObtainMethod @default(PACK_OPEN)
     serial            Int?
+    canSell           Boolean           @default(true)
+    canTrade          Boolean           @default(true)
+    canAuction        Boolean           @default(true)
     createdAt         DateTime          @default(now())
     updatedAt         DateTime          @updatedAt
     blook             Blook             @relation(fields: [blookId], references: [id], onDelete: Cascade)

@@ -23,7 +23,7 @@ model Item {
     updatedAt          DateTime            @updatedAt
     resource           Resource            @relation(fields: [imageId], references: [id], onDelete: NoAction)
     rarity             Rarity              @relation(fields: [rarityId], references: [id], onDelete: NoAction)
-    itemShops           ItemShop[]
+    itemShops          ItemShop[]
     products           Product[]
     users              UserItem[]
     spinnyWheels       SpinnyWheel[]
