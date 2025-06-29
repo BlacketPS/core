@@ -7,6 +7,7 @@ enum BlookObtainMethod {
 
 enum ItemObtainMethod {
     UNKNOWN
+    DAILY
     ITEM_SHOP
     PURCHASE
     STAFF
@@ -206,18 +207,18 @@ model UserIpAddress {
 }
 
 model UserItem {
-    id               Int              @id @default(autoincrement())
-    userId           String
-    itemId           Int
-    usesLeft         Int              @default(1)
-    initalObtainerId String
-    obtainedBy       ItemObtainMethod @default(UNKNOWN)
-    createdAt        DateTime         @default(now())
-    updatedAt        DateTime         @updatedAt
-    initalObtainer   User             @relation("initiallyObtainedItems", fields: [initalObtainerId], references: [id], onDelete: NoAction)
-    item             Item             @relation(fields: [itemId], references: [id], onDelete: Cascade)
-    user             User             @relation("items", fields: [userId], references: [id], onDelete: Cascade)
-    auctions         Auction[]
+    id                Int              @id @default(autoincrement())
+    userId            String
+    itemId            Int
+    usesLeft          Int              @default(1)
+    initialObtainerId String
+    obtainedBy        ItemObtainMethod @default(UNKNOWN)
+    createdAt         DateTime         @default(now())
+    updatedAt         DateTime         @updatedAt
+    initialObtainer   User             @relation("initiallyObtainedItems", fields: [initialObtainerId], references: [id], onDelete: NoAction)
+    item              Item             @relation(fields: [itemId], references: [id], onDelete: Cascade)
+    user              User             @relation("items", fields: [userId], references: [id], onDelete: Cascade)
+    auctions          Auction[]
 
     @@index([userId, itemId])
 }

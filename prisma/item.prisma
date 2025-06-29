@@ -3,6 +3,7 @@ enum ItemType {
     BOOSTER
     TROPHY
     PAINT_BUCKET
+    DAILY_SPINNY_WHEEL_TICKET
 }
 
 model Item {
