@@ -1,10 +1,10 @@
 enum RarityAnimationType {
-    UNCOMMON
+    COMMON
     RARE
     EPIC
     LEGENDARY
     CHROMA
-    IRIDESCENT
+    MYTHICAL
 }
 
 model Rarity {
