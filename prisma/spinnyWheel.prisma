@@ -28,8 +28,9 @@ model SpinnyWheelReward {
     spinnyWheelId Int
     spinnyWheel   SpinnyWheel @relation(fields: [spinnyWheelId], references: [id], onDelete: Cascade)
 
-    type   SpinnyWheelRewardType
-    chance Float
+    type     SpinnyWheelRewardType
+    chance   Float
+    quantity Int                   @default(1)
 
     itemId   Int?
     blookId  Int?

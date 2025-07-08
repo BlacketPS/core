@@ -15,6 +15,7 @@ model Resource {
     packIcons        Pack[]    @relation("icon")
     packImages       Pack[]    @relation("image")
     packBackgrounds  Pack[]    @relation("background")
+    packAmbiences    Pack[]    @relation("ambience")
     products         Product[]
     userBanners      User[]    @relation("banner")
     rarities         Rarity[]
