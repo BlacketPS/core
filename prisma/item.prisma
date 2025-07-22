@@ -9,7 +9,7 @@ enum ItemType {
 model Item {
     id                 Int                 @id @default(autoincrement())
     name               String              @unique
-    description        String
+    description        String?
     rarityId           Int
     imageId            Int
     type               ItemType            @default(NONE)

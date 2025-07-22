@@ -3,6 +3,7 @@ model Pack {
     name         String    @unique
     price        Int       @default(0)
     enabled      Boolean   @default(true)
+    hidden       Boolean   @default(false)
     imageId      Int
     iconId       Int
     backgroundId Int

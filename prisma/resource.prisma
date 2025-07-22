@@ -7,6 +7,7 @@ model Resource {
     banners          Banner[]
     blookBackgrounds Blook[]   @relation("blookBackground")
     blooks           Blook[]   @relation("blook")
+    blookVideos      Blook[]   @relation("blookVideo")
     emojis           Emoji[]
     fonts            Font[]
     groups           Group[]
