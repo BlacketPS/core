@@ -66,6 +66,8 @@ model User {
     lastSeen                DateTime            @default(dbgenerated("timestamp '1970-01-01 00:00:00'")) // epoch 0
     readRulesAt             DateTime?
     stripeCustomerId        String?
+    isSystem                Boolean             @default(false)
+    isAi                    Boolean             @default(false)
     subscriptions           UserSubscription[]
     permissions             PermissionType[]    @default([])
     bids                    AuctionBid[]
