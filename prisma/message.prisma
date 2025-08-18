@@ -3,6 +3,7 @@ model Message {
     roomId           Int
     content          String
     mentions         String[]
+    color            String?
     authorId         String    @db.VarChar(255)
     replyingToId     String?
     discordMessageId String?

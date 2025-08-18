@@ -261,8 +261,8 @@ model UserSetting {
     openPacksInstantly Boolean              @default(false)
     onlyRareSounds     Boolean              @default(false)
     friendRequests     SettingFriendRequest @default(ON)
-    categoriesClosed   String[]             @default([])
     tutorialsCompleted String[]             @default([])
+    chatColor          String?
     otpSecret          String?
 
     user User @relation(fields: [id], references: [id], onDelete: Cascade)
