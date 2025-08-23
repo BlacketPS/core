@@ -8,7 +8,7 @@ enum TransactionStatus {
 
 enum CurrencyType {
     USD
-    GEM
+    CRYSTAL
 }
 
 model Transaction {

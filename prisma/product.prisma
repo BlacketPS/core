@@ -26,7 +26,8 @@ model Product {
     bannerId          Int?
     groupId           Int?
     tokens            Int?               @default(0)
-    gems              Int?               @default(0)
+    diamonds          Int?               @default(0)
+    crystals          Int?               @default(0)
     isSubscription    Boolean?           @default(false)
     isQuantityCapped  Boolean?           @default(false)
     priority          Int                @default(0)
