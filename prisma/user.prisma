@@ -97,7 +97,8 @@ model User {
     ipAddresses             UserIpAddress[]
     initiallyObtainedItems  UserItem[]          @relation("initiallyObtainedItems")
     items                   UserItem[]          @relation("items")
-    userOAuth               UserOAuth[]
+    OAuth                   UserOAuth[]
+    authMethods             UserWebAuthn[]
     paymentMethods          UserPaymentMethod[]
     givenPunishments        Punishment[]        @relation("givenPunishments")
     punishments             Punishment[]        @relation("punishments")
@@ -242,6 +243,21 @@ model UserOAuth {
     createdAt    DateTime  @default(now())
     updatedAt    DateTime  @updatedAt
     user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserWebAuthn {
+    id           Int      @id @default(autoincrement())
+    userId       String
+    credentialId String   @unique
+    publicKey    String
+    counter      Int
+    nickname     String?
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
 }
 
 model UserPaymentMethod {
