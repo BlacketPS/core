@@ -1,3 +1,6 @@
 .env
 bun.lockb
+bun.lock
 node_modules/
+dist/
+package-lock.json
