@@ -276,6 +276,7 @@ model UserPaymentMethod {
 
 model UserSetting {
     id                 String               @id @unique
+    lowPerformanceMode Boolean?
     openPacksInstantly Boolean              @default(false)
     onlyRareSounds     Boolean              @default(false)
     friendRequests     SettingFriendRequest @default(ON)
