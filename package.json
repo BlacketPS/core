@@ -15,10 +15,10 @@
     },
     "description": "Blacket Core, common for Backend and Discord Bot",
     "scripts": {
-    "prisma:push": "dotenv -e ../.env -- bunx prisma db push --schema prisma",
-    "prisma:studio": "dotenv -e ../.env -- bunx prisma studio --schema prisma",
-    "prisma:format": "dotenv -e ../.env -- bunx prisma format --schema prisma",
-    "generate": "bunx prisma generate --schema prisma",
-        "postinstall": "sh -lc 'if [ \"$SKIP_PRISMA_MIGRATE\" = \"1\" ]; then echo Skipping prisma migrate deploy; else bunx prisma migrate deploy; fi' && bun run generate"
+        "build": "bun run generate",
+        "prisma:push": "dotenv -e ../.env -- bunx prisma db push --schema prisma",
+        "prisma:studio": "dotenv -e ../.env -- bunx prisma studio --schema prisma",
+        "prisma:format": "dotenv -e ../.env -- bunx prisma format --schema prisma",
+        "generate": "bunx prisma generate --schema prisma"
     }
 }
