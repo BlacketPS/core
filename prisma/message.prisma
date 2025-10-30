@@ -2,6 +2,7 @@ model Message {
     id               String    @id @default(cuid())
     roomId           Int
     content          String
+    previousContent  String[]
     mentions         String[]
     color            String?
     authorId         String    @db.VarChar(255)
