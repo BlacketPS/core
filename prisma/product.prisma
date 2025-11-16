@@ -40,14 +40,14 @@ model Product {
     parentProductId      Int?
     createdAt            DateTime           @default(now())
     updatedAt            DateTime           @updatedAt
-    parentProduct        Product?           @relation("productSubProducts", fields: [parentProductId], references: [id], onDelete: Cascade)
+    parentProduct        Product?           @relation("productSubProducts", fields: [parentProductId], references: [id], onDelete: SetNull)
     image                Resource           @relation(fields: [imageId], references: [id], onDelete: NoAction)
-    blook                Blook?             @relation(fields: [blookId], references: [id])
-    item                 Item?              @relation(fields: [itemId], references: [id])
-    title                Title?             @relation(fields: [titleId], references: [id])
-    font                 Font?              @relation(fields: [fontId], references: [id])
-    banner               Banner?            @relation(fields: [bannerId], references: [id])
-    group                Group?             @relation(fields: [groupId], references: [id])
+    blook                Blook?             @relation(fields: [blookId], references: [id], onDelete: SetNull)
+    item                 Item?              @relation(fields: [itemId], references: [id], onDelete: SetNull)
+    title                Title?             @relation(fields: [titleId], references: [id], onDelete: SetNull)
+    font                 Font?              @relation(fields: [fontId], references: [id], onDelete: SetNull)
+    banner               Banner?            @relation(fields: [bannerId], references: [id], onDelete: SetNull)
+    group                Group?             @relation(fields: [groupId], references: [id], onDelete: SetNull)
     subscribers          UserSubscription[]
     stores               Store[]
     transactions         Transaction[]

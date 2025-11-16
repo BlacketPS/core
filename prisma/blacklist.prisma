@@ -5,6 +5,6 @@ model Blacklist {
     createdAt    DateTime @default(now())
     updatedAt    DateTime @updatedAt
 
-    ipAddress  IpAddress  @relation(fields: [ipAddressId], references: [id], onDelete: NoAction)
-    punishment Punishment @relation(fields: [punishmentId], references: [id], onDelete: NoAction)
+    ipAddress  IpAddress  @relation(fields: [ipAddressId], references: [id], onDelete: Cascade)
+    punishment Punishment @relation(fields: [punishmentId], references: [id], onDelete: Cascade)
 }

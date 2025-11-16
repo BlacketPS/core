@@ -15,7 +15,7 @@ model SpinnyWheel {
     name String
 
     itemId Int
-    item   Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
+    item   Item @relation(fields: [itemId], references: [id], onDelete: NoAction)
 
     rewards SpinnyWheelReward[]
 
@@ -27,7 +27,7 @@ model SpinnyWheelReward {
     id Int @id @default(autoincrement())
 
     spinnyWheelId Int
-    spinnyWheel   SpinnyWheel @relation(fields: [spinnyWheelId], references: [id], onDelete: Cascade)
+    spinnyWheel   SpinnyWheel @relation(fields: [spinnyWheelId], references: [id], onDelete: NoAction)
 
     type     SpinnyWheelRewardType
     chance   Float
@@ -46,9 +46,9 @@ model SpinnyWheelReward {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    item   Item?   @relation(fields: [itemId], references: [id], onDelete: NoAction)
-    blook  Blook?  @relation(fields: [blookId], references: [id], onDelete: NoAction)
-    title  Title?  @relation(fields: [titleId], references: [id], onDelete: NoAction)
-    font   Font?   @relation(fields: [fontId], references: [id], onDelete: NoAction)
-    banner Banner? @relation(fields: [bannerId], references: [id], onDelete: NoAction)
+    item   Item?   @relation(fields: [itemId], references: [id], onDelete: SetNull)
+    blook  Blook?  @relation(fields: [blookId], references: [id], onDelete: SetNull)
+    title  Title?  @relation(fields: [titleId], references: [id], onDelete: SetNull)
+    font   Font?   @relation(fields: [fontId], references: [id], onDelete: SetNull)
+    banner Banner? @relation(fields: [bannerId], references: [id], onDelete: SetNull)
 }

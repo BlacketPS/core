@@ -12,8 +12,8 @@ model Message {
     createdAt        DateTime  @default(now())
     updatedAt        DateTime  @updatedAt
     deletedAt        DateTime?
-    author           User      @relation(fields: [authorId], references: [id], onDelete: NoAction)
+    author           User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
     replyingTo       Message?  @relation("reply", fields: [replyingToId], references: [id])
     replies          Message[] @relation("reply")
-    room             Room      @relation(fields: [roomId], references: [id], onDelete: NoAction)
+    room             Room      @relation(fields: [roomId], references: [id], onDelete: Cascade)
 }

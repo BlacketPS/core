@@ -3,14 +3,14 @@ model NewsPost {
     title   String
     content String
 
-    imageId  Int
+    imageId  Int?
     authorId String
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    image  Upload @relation(fields: [imageId], references: [id], onDelete: NoAction)
-    author User   @relation(fields: [authorId], references: [id], onDelete: NoAction)
+    image  Upload? @relation(fields: [imageId], references: [id], onDelete: SetNull)
+    author User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
     votes UserNewsPostVote[]
 }

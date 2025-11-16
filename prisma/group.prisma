@@ -8,7 +8,7 @@ model Group {
     deletedAt     DateTime?
     permissions   PermissionType[]
     imageId       Int?
-    image         Resource?        @relation(fields: [imageId], references: [id], onDelete: NoAction)
+    image         Resource?        @relation(fields: [imageId], references: [id], onDelete: SetNull)
     products      Product[]
     users         UserGroup[]
     discordRoleId String?

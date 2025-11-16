@@ -15,5 +15,5 @@ model Pack {
     image        Resource  @relation("image", fields: [imageId], references: [id], onDelete: NoAction)
     icon         Resource  @relation("icon", fields: [iconId], references: [id], onDelete: NoAction)
     background   Resource  @relation("background", fields: [backgroundId], references: [id], onDelete: NoAction)
-    ambience     Resource? @relation("ambience", fields: [ambienceId], references: [id], onDelete: NoAction)
+    ambience     Resource? @relation("ambience", fields: [ambienceId], references: [id], onDelete: SetNull)
 }

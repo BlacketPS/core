@@ -60,6 +60,7 @@ model User {
     diamonds                Int                 @default(0)
     crystals                Int                 @default(0)
     experience              Int                 @default(0)
+    reputation              Int                 @default(0)
     lastClaimed             DateTime            @default(dbgenerated("timestamp '1970-01-01 00:00:00'")) // epoch 0
     ipAddressId             Int
     createdAt               DateTime            @default(now())
@@ -80,12 +81,12 @@ model User {
     friends                 User[]              @relation("friendship")
     blockedBy               User[]              @relation("blockedUsers")
     blocked                 User[]              @relation("blockedUsers")
-    avatar                  UserBlook?          @relation(fields: [avatarId], references: [id], onDelete: NoAction)
-    banner                  Resource?           @relation("banner", fields: [bannerId], references: [id], onDelete: Cascade)
+    avatar                  UserBlook?          @relation(fields: [avatarId], references: [id], onDelete: SetNull)
+    banner                  Resource?           @relation("banner", fields: [bannerId], references: [id], onDelete: SetNull)
     customAvatar            Upload?             @relation("customAvatar", fields: [customAvatarId], references: [id])
     customBanner            Upload?             @relation("customBanner", fields: [customBannerId], references: [id])
-    font                    Font                @relation(fields: [fontId], references: [id], onDelete: NoAction)
-    title                   Title               @relation(fields: [titleId], references: [id], onDelete: NoAction)
+    font                    Font                @relation(fields: [fontId], references: [id], onDelete: SetDefault)
+    title                   Title               @relation(fields: [titleId], references: [id], onDelete: SetDefault)
     banners                 UserBanner[]
     initiallyObtainedBlooks UserBlook[]         @relation("initialObtainer")
     blooks                  UserBlook[]         @relation("blooks")
@@ -123,7 +124,7 @@ model UserBanner {
     bannerId  Int
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    banner    Banner   @relation(fields: [bannerId], references: [id], onDelete: NoAction)
+    banner    Banner   @relation(fields: [bannerId], references: [id], onDelete: Cascade)
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([userId, bannerId])
@@ -301,7 +302,7 @@ model UserFont {
     fontId    Int
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    font      Font     @relation(fields: [fontId], references: [id], onDelete: NoAction)
+    font      Font     @relation(fields: [fontId], references: [id], onDelete: Cascade)
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([userId, fontId])
@@ -313,7 +314,7 @@ model UserTitle {
     titleId   Int
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    title     Title    @relation(fields: [titleId], references: [id], onDelete: NoAction)
+    title     Title    @relation(fields: [titleId], references: [id], onDelete: Cascade)
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([userId, titleId])
@@ -330,7 +331,7 @@ model UserSubscription {
     updatedAt            DateTime               @updatedAt
     expiresAt            DateTime?
     user                 User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    product              Product                @relation(fields: [productId], references: [id], onDelete: NoAction)
+    product              Product                @relation(fields: [productId], references: [id], onDelete: Cascade)
     ipAddress            IpAddress              @relation(fields: [ipAddressId], references: [id], onDelete: Cascade)
 
     @@unique([userId, stripeSubscriptionId])

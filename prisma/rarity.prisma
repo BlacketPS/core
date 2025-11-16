@@ -20,5 +20,5 @@ model Rarity {
     updatedAt         DateTime            @updatedAt
     blook             Blook[]
     item              Item[]
-    image             Resource?           @relation(fields: [imageId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    image             Resource?           @relation(fields: [imageId], references: [id], onDelete: SetNull)
 }
