@@ -17,7 +17,7 @@ model Blook {
     rarityId           Int
     imageId            Int
     backgroundId       Int
-    videoId            Int?
+    video              BlookVideo?
     packId             Int?
     onlyOnDay          DayType?
     isBig              Boolean             @default(false)
@@ -26,7 +26,6 @@ model Blook {
     createdAt          DateTime            @default(now())
     updatedAt          DateTime            @updatedAt
     background         Resource            @relation("blookBackground", fields: [backgroundId], references: [id], onDelete: NoAction)
-    video              Resource?           @relation("blookVideo", fields: [videoId], references: [id], onDelete: NoAction)
     image              Resource            @relation("blook", fields: [imageId], references: [id], onDelete: NoAction)
     pack               Pack?               @relation(fields: [packId], references: [id])
     rarity             Rarity              @relation(fields: [rarityId], references: [id], onDelete: NoAction)
@@ -34,4 +33,13 @@ model Blook {
     products           Product[]
     userBlooks         UserBlook[]
     spinnyWheelRewards SpinnyWheelReward[]
+}
+
+model BlookVideo {
+    id         Int      @id @default(autoincrement())
+    blookId    Int      @unique
+    resourceId Int
+    length     Int
+    blook      Blook    @relation(fields: [blookId], references: [id], onDelete: Cascade)
+    resource   Resource @relation("blookVideo", fields: [resourceId], references: [id], onDelete: NoAction)
 }
